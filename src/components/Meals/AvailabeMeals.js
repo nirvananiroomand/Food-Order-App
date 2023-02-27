@@ -2,6 +2,7 @@ import classes from "./AvailableMeals.module.css";
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 import { useEffect } from "react";
+import { useState } from "react";
 
 // const DUMMY_MEALS = [
 //   {
@@ -31,35 +32,38 @@ import { useEffect } from "react";
 // ];
 
 const AvailableMeals = () => {
+    const [meals, setMeals] = useState([]);
+
     useEffect(() => {
         const fetchMeals = async () => {
             const response = await fetch(
-                "https://console.firebase.google.com/project/food-order-app-5e0a1/database/food-order-app-5e0a1-default-rtdb/data/~2F/meals.json"
+                "https://food-order-app-5e0a1-default-rtdb.firebaseio.com/meals.json"
             );
             const responseData = await response.json();
+
+            const loadedMeals = [];
+            for (const key in responseData) {
+                loadedMeals.push({
+                    id: key,
+                    name: responseData[key].name,
+                    description: responseData[key].description,
+                    price: responseData[key].price,
+                });
+            }
+    
+            setMeals(loadedMeals);
         };
-
-        const loadedMeals = [];
-
-        for (const key in responseData) {
-            loadedMeals.push({
-                id: key,
-                name: responseData[key].name,
-                description: responseData[key].description,
-                price: responseData[key].price,
-            });
-        }
 
         fetchMeals();
     }, []);
 
-    const mealsList = DUMMY_MEALS.map((meals) => (
+    const mealsList = meals.map((meal) => (
         <MealItem
-            key={meals.id}
-            id={meals.id}
-            name={meals.name}
-            description={meals.description}
-            price={meals.price}
+            key={meal.id}
+            id={meal.id}
+            name={meal.name}
+            description={meal.description}
+            price={meal.price}
         />
     ));
 
