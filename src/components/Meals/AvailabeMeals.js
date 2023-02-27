@@ -1,6 +1,7 @@
 import classes from "./AvailableMeals.module.css";
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
+import { useEffect } from "react";
 
 // const DUMMY_MEALS = [
 //   {
@@ -30,6 +31,16 @@ import MealItem from "./MealItem/MealItem";
 // ];
 
 const AvailableMeals = () => {
+
+  useEffect(() => {
+    const fetchMeals = async () => {
+      const response = await fetch("https://console.firebase.google.com/project/food-order-app-5e0a1/database/food-order-app-5e0a1-default-rtdb/data/~2F/meals.json");
+      const responseData = await response.json();
+    };
+
+    fetchMeals();
+  }, []);
+
   const mealsList = DUMMY_MEALS.map((meals) => (
     <MealItem
       key={meals.id}
