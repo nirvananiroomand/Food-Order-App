@@ -22,7 +22,17 @@ const Cart = (props) => {
 
     const orderHandler = () => {
         setIsCheckout(true);
-    }
+    };
+
+    const submitOrderHandler = (userData) => {
+        fetch('https://food-order-app-5e0a1-default-rtdb.firebaseio.com/orders.json', {
+            method: 'POST',
+            body: JSON.stringify({
+                user: userData,
+                orderedItems: cartCntxt.items
+            })
+        });
+    };
 
     const cartItems = (
         <ul className={classes["cart-items"]}>
@@ -46,7 +56,7 @@ const Cart = (props) => {
                 <span>Total Amount</span>
                 <span>{totalAmount}</span>
             </div>
-            {isCheckout && <Checkout onCancel={props.onClose}/>}
+            {isCheckout && <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose}/>}
             <div className={classes.actions}>
                 <button
                     className={classes["button--alt"]}
