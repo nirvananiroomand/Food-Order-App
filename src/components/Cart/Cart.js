@@ -46,7 +46,7 @@ const Cart = (props) => {
                 <span>Total Amount</span>
                 <span>{totalAmount}</span>
             </div>
-            {isCheckout && <Checkout/>}
+            {isCheckout && <Checkout onCancel={props.onClose}/>}
             <div className={classes.actions}>
                 <button
                     className={classes["button--alt"]}
