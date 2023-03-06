@@ -33,6 +33,7 @@ import { useState } from "react";
 
 const AvailableMeals = () => {
     const [meals, setMeals] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchMeals = async () => {
@@ -52,10 +53,15 @@ const AvailableMeals = () => {
             }
     
             setMeals(loadedMeals);
+            setIsLoading(false);
         };
 
         fetchMeals();
     }, []);
+
+    if (isLoading === true) {
+        return <div className={classes.isLoading}>Loading Meals...</div>        
+    }
 
     const mealsList = meals.map((meal) => (
         <MealItem
