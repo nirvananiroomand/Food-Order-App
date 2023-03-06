@@ -11,10 +11,17 @@
     padding: 0;
   }
 
-  .isLoading{
+  .mealsLoading{
     text-align: center;
     font-size: 2em;
     color: white;
+    margin-top: 2em;
+  }
+
+  .mealsError{
+    text-align: center;
+    font-size: 2em;
+    color: rgb(249, 82, 82);
     margin-top: 2em;
   }
   
