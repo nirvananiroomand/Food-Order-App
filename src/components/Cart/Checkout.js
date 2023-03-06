@@ -2,7 +2,7 @@ import classes from "./Checkout.module.css";
 
 const Checkout = (props) => {
     return ( 
-        <form className={classes.form} onSubmit={confirmHandler}>
+        <form className={classes.form} >
       <div className={classes.control}>
         <label htmlFor='name'>Your Name</label>
         <input type='text' id='name' />
